@@ -18,4 +18,4 @@ Simply generate list.txt using
 `stepgen <T>` - T is your step size.
 Test it using:
 
-`bitcurve 033c4a45cbd643ff97d77f41ea37e843648d50fd894b864b0d52febc62f6454f7c 100 1000000 10`
+`bitcurve 03a7a4c30291ac1db24b4ab00c442aa832f7794b5a0959bec6e8d7fee802289dcd 100 1000 10`
