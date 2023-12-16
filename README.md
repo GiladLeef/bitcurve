@@ -11,12 +11,11 @@ To build the executables, install a modern GCC development envirement.
 I recommand using MSYS2 and mingw-64.
 
 Then, install gmp and then run `build.bat`. 
+## Usage:
+`bitcurve <public_key> <step_size> <search_size> <threads_num>` 
 
-Usage: 
 Simply generate list.txt using
-`stepgen <T>` 
-T is your giant step size. in this example, let's use 100:
-`stepgen 100`
-then test it using:
+`stepgen <T>` - T is your step size.
+Test it using:
 
- bitcurve 033c4a45cbd643ff97d77f41ea37e843648d50fd894b864b0d52febc62f6454f7c 100 1000000 10
+`bitcurve 033c4a45cbd643ff97d77f41ea37e843648d50fd894b864b0d52febc62f6454f7c 100 1000000 10`
