@@ -20,6 +20,7 @@
 typedef struct {
     mpz_t start;
     mpz_t step;
+    mpz_t end;
     SimpleSet *public_keys_set;
     struct Point target_point;
     pthread_t* threads;
@@ -33,15 +34,10 @@ void *search_thread(void *arg) {
     mpz_init(result);
 
     mpz_set(N, data->start);
-
-    // Calculate the end point of the chunk
-    mpz_t end_point;
-    mpz_init(end_point);
-    mpz_add(end_point, data->start, data->step);
-
+    
     int match_found = 0;  // Flag to indicate whether a match is found
 
-    for (; mpz_cmp(end_point, N) > 0; mpz_add_ui(N, N, 1)) {
+    for (; mpz_cmp(data->end, N) > 0; mpz_add_ui(N, N, 1)) {
         mpz_mul(result, N, data->step);
 
         struct Point B, C;
@@ -90,7 +86,6 @@ void *search_thread(void *arg) {
 
     mpz_clear(N);
     mpz_clear(result);
-    mpz_clear(end_point);
     return NULL;
 }
 
@@ -295,6 +290,9 @@ int main(int argc, char **argv) {
         mpz_init(thread_data[i].start);
         mpz_mul_ui(thread_data[i].start, chunk, i);
         mpz_add_ui(thread_data[i].start, thread_data[i].start, 1);
+
+        mpz_init(thread_data[i].end);
+        mpz_add(thread_data[i].end, thread_data[i].start, chunk);
 
         mpz_init(thread_data[i].step);
         mpz_set_ui(thread_data[i].step, step_size);
